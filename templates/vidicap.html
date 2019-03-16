@@ -13,18 +13,18 @@
         <div class="col-sm-4" align="center">
          <form>
          <br>
-         <select class="form-control" id="select_form" >
+         <select class="form-control" id="select_type_form" >
              <option>Vidicap HD</option>
              <option>Vidicap Mini</option>
              <option>Vidicap Stream</option>
              <option>Vidicap Touch</option>
          </select>
-         <input type="text"  name="username" class="form-control" placeholder="Дата отгрузки" >
-         <input type="text"  name="username" class="form-control" placeholder="Где установлен" >
-         <input type="text"  name="username" class="form-control" placeholder="Примечание" >
+         <input type="text" id="date" class="form-control" placeholder="Дата отгрузки" >
+         <input type="text" id="set_up_place" class="form-control" placeholder="Где установлен" >
+         <input type="text" id="note" class="form-control" placeholder="Примечание" >
          <br>
          </form>
-         <button id ='btn_add' class="btn-primary">Add vidicap</button>
+         <button id ='btn_add' class="btn btn-primary btn-block">Add vidicap</button>
         </div>
        </div>
       </div>
@@ -67,7 +67,24 @@
         return false;
             });
         });
+     $(document).ready(function () {
+         $('#btn_add').click(function (e) {
 
+             $.post(
+                 "add_new_vidicap",
+                 {
+                     'vidicap_model':$('#select_type_form').val(),
+                     'sell_date':$('#date').val(),
+                     'set_up_place':$('#set_up_place').val(),
+                     'note':$('#note').val()
+                 },
+                 function (response) {
+                     alert(response.message)
+                 }
+             );
+         })
+     });
     </script>
+
 
 {% endblock %}

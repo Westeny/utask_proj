@@ -9,6 +9,7 @@ urlpatterns = [
     path('logout', do_logout),
     path('add_new_task', add_new_task),
     path('timeliner', timeline),
-    path('vidicaps', vidicap_info)
+    path('vidicaps', vidicap_info),
+    path('add_new_vidicap', add_new_vidicap)
 ]
 

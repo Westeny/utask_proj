@@ -23,7 +23,14 @@ def vidicap_info(request):
     context = {'vidicap': Vidicap.objects.all()}
     return render_to_response('vidicap.html', context)
 
-
+def add_new_vidicap(request):
+    new_vidicap = Vidicap(vidicap_model = request.POST['vidicap_model'],
+                          sell_date = parse_date(request.POST['sell_date']),
+                          set_up_place = request.POST['set_up_place'],
+                          note = request.POST['note'])
+    new_vidicap.save()
+    response= {'message': 'Запись добавлена'}
+    return JsonResponse(response)
 
 
 
