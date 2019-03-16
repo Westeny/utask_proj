@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/app/static/css/bootstrap.min.css">
+    <script src="/app/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/app/static/js/popper.min.js"></script>
+    <script src="/app/static/js/bootstrap.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-pills">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse">
+    <div class="navbar-nav container row col-md-11">
+      <a class="nav-itme"></a>
+      <a class="nav-item nav-link" href="/">My Tasks<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="timeliner">TimeLiner</a>
+      <a class="nav-item nav-link" href="vidicaps">Vidicaps info</a>
+        <a class="nav-item nav-link" href="#">Tenders info</a></div>
+      <div class="navbar-nav col-md-1" align="right">
+      <a class="nav-item nav-link" href="logout">Logout</a>
+    </div>
+  </div>
+</nav>
+
+{% block content %}
+    <div>
+        <a> <button id="new_task" class="btn-block">Add new task</button></a>
+    </div>
+
+    <div id="add_form" style="display: none" >
+     <div class="container-fluid">
+      <div class="row">
+       <div class="col-4"></div>
+        <div class="col-sm-4" align="center">
+         <form>
+         <br>
+         <label>Task for</label>
+         <select class="form-control" id="user">
+              {% for person in user %}
+              <option>{{ person.username }}</option>
+              {% endfor %}
+         </select>
+         <input type="text"  id="task" class="form-control" placeholder="Task" >
+         <input type="text"  id="tag" class="form-control" placeholder="Tag" >
+         <input type="text"  id="deadline" class="form-control" placeholder="Deadline (YYYY-MM-DD)" >
+         <input type="text"  id="note" class="form-control" placeholder="Note" >
+         <br>
+         <button id ='btn_add' class="btn-primary">Add task</button>
+         </form>
+
+        </div>
+       </div>
+      </div>
+     </div>
+
+
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Task</th>
+          <th scope="col">Tag</th>
+          <th scope="col">Note</th>
+          <th scope="col">Deadline</th>
+          <th scope="col">Complite</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+      {% for item in tasks %}
+        <tr class='str' id ="{{ item.id }}">
+          <th scope="row" class="bg-transparent">{{ item.id }}</th>
+          <td>{{ item.task_name }}</td>
+          <td>{{ item.tags }}</td>
+          <td>{{ item.note }}</td>
+          <td>{{ item.deadline_date }}</td>
+          <td>{{ item.is_complete }}</td>
+        </tr>
+          <tr>
+          <td class="bg-light" colspan="6" style="display: none" id="content{{ item.id }}">
+              <a href=""><button class="btn btn-success">Complite</button></a>
+              <a href=""><button class="btn btn-dark">Change</button></a>
+              <a href=""><button class="btn btn-danger">Delete</button></a>
+          </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+</table>
+    <script src="/app/static/js/jquery-3.3.1.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    $('.str').click(function () {
+        if ($('#content' + this.id).is(":hidden")) {
+            $('#content' + this.id).show("slow");
+        } else {
+            $('#content' + this.id).hide("slow");
+        }
+        return false;
+            });
+        });
+    $(document).ready(function(){
+    $('#new_task').click(function () {
+        if ($('#add_form').is(":hidden")) {
+            $('#add_form').show("slow");
+        } else {
+            $('#add_form').hide("slow");
+        }
+        return false;
+            });
+        });
+
+    $(document).ready(function () {
+         $('#btn_add').click(function (e) {
+
+             $.post(
+                 "add_new_task",
+                 {
+                     'user':$('#user').val(),
+                     'task':$('#task').val(),
+                     'tag':$('#tag').val(),
+                     'deadline_date':$('#deadline').val(),
+                     'note':$('#note').val()
+                 },
+                 function (response) {
+                     alert(response.message)
+                 }
+             );
+         })
+     });
+    </script>
+{% endblock content %}
+</body>
+</html>

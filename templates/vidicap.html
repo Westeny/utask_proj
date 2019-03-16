@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+
+{%  block content %}
+
+    <div>
+        <a> <button id="new_task" class="btn-block">Add vidicap</button></a>
+    </div>
+
+    <div id="add_form" style="display: none" >
+     <div class="container-fluid">
+      <div class="row">
+       <div class="col-4"></div>
+        <div class="col-sm-4" align="center">
+         <form>
+         <br>
+         <select class="form-control" id="select_form" >
+             <option>Vidicap HD</option>
+             <option>Vidicap Mini</option>
+             <option>Vidicap Stream</option>
+             <option>Vidicap Touch</option>
+         </select>
+         <input type="text"  name="username" class="form-control" placeholder="Дата отгрузки" >
+         <input type="text"  name="username" class="form-control" placeholder="Где установлен" >
+         <input type="text"  name="username" class="form-control" placeholder="Примечание" >
+         <br>
+         </form>
+         <button id ='btn_add' class="btn-primary">Add vidicap</button>
+        </div>
+       </div>
+      </div>
+     </div>
+
+
+
+<table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Тип</th>
+          <th scope="col">Дата отгрузки</th>
+          <th scope="col">Где установлен</th>
+          <th scope="col">Примечание</th>
+          <th scope="col">Введен</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+      {% for item in vidicap %}
+
+          <td>{{ item.vidicap_model }}</td>
+          <td>{{ item.sell_date }}</td>
+          <td>{{ item.set_up_place }}</td>
+          <td>{{ item.note }}</td>
+          <td>{{ item.set_up_complete }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+</table>
+
+
+    <script>
+     $(document).ready(function(){
+     $('#new_task').click(function () {
+        if ($('#add_form').is(":hidden")) {
+            $('#add_form').show("slow");
+        } else {
+            $('#add_form').hide("slow");
+        }
+        return false;
+            });
+        });
+
+    </script>
+
+{% endblock %}
