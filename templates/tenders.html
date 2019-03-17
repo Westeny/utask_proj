@@ -1,0 +1,177 @@
+{% extends 'index.html' %}
+
+{% block nav %}
+      <a class="nav-itme"></a>
+      <a class="nav-item nav-link" href="/">My Tasks<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="timeliner">TimeLiner</a>
+      <a class="nav-item nav-link" href="vidicaps">Vidicaps info</a>
+      <a class="nav-item nav-link active" href="tenders">Tenders info</a></div>
+      <div class="navbar-nav col-md-1" align="right">
+      <a class="nav-item nav-link" href="logout">Logout</a>
+{% endblock %}
+
+{%  block content %}
+    <div>
+        <a> <button id="new_tend" class="btn-block">Новый конкурс</button></a>
+    </div>
+
+    <div id="add_form" style="display: none" >
+     <div class="container-fluid">
+      <div class="row">
+       <div class="col-4"></div>
+        <div class="col-sm-4" align="center">
+         <br>
+         <form>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="tender_number">Номер конкурса</label>
+                  <input type="text" class="form-control" id="tender_number" placeholder="Номер конкурса">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="tender_lot">Номер лота</label>
+                  <input type="text" class="form-control" id="tender_lot" placeholder="Номер лота">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="date_podacha">Дата подачи предложения</label>
+                <input type="date" class="form-control" id="date_podacha" placeholder="Введите дату">
+              </div>
+              <div class="form-group">
+                <label for="date_tender">Дата торгов</label>
+                <input type="date" class="form-control" id="date_tender" placeholder="Введите дату">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="buyer">Покупатель</label>
+                  <input type="text" class="form-control" id="buyer" placeholder="Покупатель">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="customer">Заказчик</label>
+                  <input type="text" class="form-control" id="customer" placeholder="Заказчик">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="budget">Тип бюджета</label>
+                <select id="budget" class="form-control">
+                    <option selected>Местный бюджет</option>
+                    <option>Республиканский бюджет</option>
+                    <option>Другое</option>
+                </select>
+              </div>
+                <div class="form-group">
+                <label for="sum_offer">Сумма предлождения</label>
+                <input type="number" class="form-control" id="sum_offer" placeholder="Введите сумму предложения">
+              </div>
+              <div class="form-group">
+                <label for="note">Примечание</label>
+                <textarea class="form-control" id="note" rows="3"></textarea>
+              </div>
+         <button id ='btn_add' class="btn btn-primary btn-block">Добавить конкурс</button>
+         </form>
+        </div>
+       </div>
+      </div>
+     </div>
+
+
+<table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Номер конкурса</th>
+          <th scope="col">Номер лота</th>
+          <th scope="col">Дата подачи предложения</th>
+          <th scope="col">Дата проведения торгов</th>
+          <th scope="col">Покупатель</th>
+          <th scope="col">Заказчик</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+      {% for item in tenders %}
+        <tr class='str' id ="{{ item.id }}">
+          <th scope="row" class="bg-transparent">{{ item.tender_number }}</th>
+          <td>{{ item.tender_lot }}</td>
+          <td>{{ item.date_podacha }}</td>
+          <td>{{ item.date_tender }}</td>
+          <td>{{ item.buyer }}</td>
+          <td>{{ item.customer }}</td>
+        </tr>
+          <tr>
+          <td class="bg-light" colspan="6" style="display: none" id="content{{ item.id }}">
+              <p>
+                  Тип бюджета: {{ item.budget }}   <p> Сумма предложения: {{ item.sum_offer }}</p>
+              </p>
+              <p>
+                  Примечание: {{ item.note }}
+              </p>
+              <a href=""><button class="btn btn-dark">Change</button></a>
+              <a href=""><button class="btn btn-danger">Delete</button></a>
+          </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+</table>
+
+
+<script>
+$(document).ready(function(){
+    $('.str').click(function () {
+        if ($('#content' + this.id).is(":hidden")) {
+            $('#content' + this.id).show("slow");
+        } else {
+            $('#content' + this.id).hide("slow");
+        }
+        return false;
+            });
+        });
+    $(document).ready(function(){
+    $('#new_tend').click(function () {
+        if ($('#add_form').is(":hidden")) {
+            $('#add_form').show("slow");
+        } else {
+            $('#add_form').hide("slow");
+        }
+        return false;
+            });
+        });
+
+
+    $(document).ready(function () {
+         $('#btn_add').click(function (e) {
+
+             $.post(
+                 "add_new_tender",
+                 {
+                        'tender_number':$('#tender_number').val(),
+                        'tender_lot':$('#tender_lot').val(),
+                        'budget':$('#budget').val(),
+                        'date_podacha':$('#date_podacha').val(),
+                        'date_tender':$('#date_tender').val(),
+                        'buyer':$('#buyer').val(),
+                        'customer':$('#customer').val(),
+                        'sum_offer':$('#sum_offer').val(),
+                        'note':$('#note').val()
+                 },
+                 function (response) {
+                     alert(response.message)
+                 }
+             );
+         })
+     });
+
+
+
+
+</script>
+<link rel="stylesheet" href="/app/static/css/bootstrap-datepicker.min.css">
+<script src="/app/static/js/bootstrap-datepicker.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('#date_podacha').datepicker({
+        format : 'yyyy-mm-dd'
+    });});
+$(document).ready(function () {
+    $('#date_tender').datepicker({
+         format : 'yyyy-mm-dd'
+    });});
+</script>
+{% endblock %}

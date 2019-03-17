@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="46fb9712-3ff3-4bec-bdf3-687076c26558" name="Default Changelist" comment="add_new_vidicap added">
-      <change afterPath="$PROJECT_DIR$/app/migrations/0008_auto_20190317_0925.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/migrations/0010_auto_20190317_1143.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/migrations/0011_auto_20190317_1146.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/migrations/0012_auto_20190317_1309.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/migrations/0014_auto_20190317_1421.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/migrations/0015_auto_20190317_1502.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/migrations/0016_auto_20190317_1522.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/css/timeliner.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/timeliner.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/timeliner.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/timeliner.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/vidicap.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vidicap.html" afterDir="false" />
-    </list>
+    <list default="true" id="46fb9712-3ff3-4bec-bdf3-687076c26558" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +81,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
+            <state relative-caret-position="272">
               <caret line="139" column="15" lean-forward="true" selection-start-line="139" selection-start-column="15" selection-end-line="139" selection-end-column="15" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
@@ -176,6 +158,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="4e1bd2be-f0b5-4459-9399-9d1171485ed4" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -265,7 +250,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="vcs.Subversion" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -314,7 +299,7 @@
     </configuration>
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>$PROJECT_DIR$/../.subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -324,29 +309,37 @@
       <option name="presentableId" value="Default" />
       <updated>1552648059630</updated>
       <workItem from="1552648061667" duration="32962000" />
-      <workItem from="1552763887550" duration="26071000" />
+      <workItem from="1552763887550" duration="26800000" />
     </task>
+    <task id="LOCAL-00001" summary="add_new_vidicap added">
+      <created>1552845642300</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1552845642300</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59033000" />
+    <option name="totallyTimeSpent" value="59762000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1176" height="831" extended-state="0" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.5020161" side_tool="true" weight="0.15524194" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49798387" visible="true" weight="0.16666667" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49798387" visible="true" weight="0.16666667" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50160426" side_tool="true" weight="0.32882273" />
-      <window_info anchor="bottom" id="Version Control" order="3" weight="0.32882273" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="3" visible="true" weight="0.32882273" />
       <window_info anchor="bottom" id="manage.py@utask_proj" order="4" weight="0.32717392" />
       <window_info anchor="bottom" id="Python Console" order="5" weight="0.32717392" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Find" order="8" />
-      <window_info anchor="bottom" id="Run" order="9" sideWeight="0.4983957" visible="true" weight="0.28552097" />
+      <window_info anchor="bottom" id="Run" order="9" sideWeight="0.4983957" weight="0.28552097" />
       <window_info anchor="bottom" id="Debug" order="10" sideWeight="0.49946523" weight="0.3991881" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
@@ -360,6 +353,32 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add_new_vidicap added" />
@@ -502,7 +521,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
+        <state relative-caret-position="272">
           <caret line="139" column="15" lean-forward="true" selection-start-line="139" selection-start-column="15" selection-end-line="139" selection-end-column="15" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
@@ -528,5 +547,20 @@
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
