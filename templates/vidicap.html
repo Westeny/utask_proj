@@ -1,36 +1,55 @@
 {% extends 'index.html' %}
 
+{% block nav %}
+      <a class="nav-itme"></a>
+      <a class="nav-item nav-link" href="/">My Tasks<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="timeliner">TimeLiner</a>
+      <a class="nav-item nav-link active" href="vidicaps">Vidicaps info</a>
+      <a class="nav-item nav-link" href="tenders">Tenders info</a></div>
+      <div class="navbar-nav col-md-1" align="right">
+      <a class="nav-item nav-link" href="logout">Logout</a>
+{% endblock %}
+
 {%  block content %}
 
     <div>
         <a> <button id="new_task" class="btn-block">Add vidicap</button></a>
     </div>
 
-    <div id="add_form" style="display: none" >
+       <div id="add_form" style="display: none" >
      <div class="container-fluid">
       <div class="row">
        <div class="col-4"></div>
         <div class="col-sm-4" align="center">
          <form>
-         <br>
-         <select class="form-control" id="select_type_form" >
-             <option>Vidicap HD</option>
-             <option>Vidicap Mini</option>
-             <option>Vidicap Stream</option>
-             <option>Vidicap Touch</option>
-         </select>
-         <input type="text" id="date" class="form-control" placeholder="Дата отгрузки" >
-         <input type="text" id="set_up_place" class="form-control" placeholder="Где установлен" >
-         <input type="text" id="note" class="form-control" placeholder="Примечание" >
-         <br>
+              <div class="form-group">
+                <label for="select_type_form">Тип Vidicap</label>
+                <select id="select_type_form" class="form-control">
+                     <option>Vidicap HD</option>
+                     <option>Vidicap Mini</option>
+                     <option>Vidicap Stream</option>
+                     <option>Vidicap Touch</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="task">Где установлен</label>
+                <input type="text" class="form-control" id="set_up_place" placeholder="Место установки">
+              </div>
+              <div class="form-group">
+                <label for="note">Примечание</label>
+                <textarea class="form-control" id="note" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="date">Дата отгрузки</label>
+                <input type="date" class="form-control" id="date" placeholder="Введите дату">
+              </div>
+              <button id ='btn_add' class="btn btn-primary btn-block">Добавить</button>
+            <br>
          </form>
-         <button id ='btn_add' class="btn btn-primary btn-block">Add vidicap</button>
         </div>
        </div>
       </div>
      </div>
-
-
 
 <table class="table table-striped">
       <thead>
@@ -44,21 +63,88 @@
       </thead>
       <tbody id="table">
       {% for item in vidicap %}
-
+          <tr class='str' id ="{{ item.id }}">
+          <th scope="row" class="bg-transparent" hidden>{{ item.id }}</th>
           <td>{{ item.vidicap_model }}</td>
           <td>{{ item.sell_date }}</td>
           <td>{{ item.set_up_place }}</td>
           <td>{{ item.note }}</td>
           <td>{{ item.set_up_complete }}</td>
-        </tr>
+          <tr>
+          <td class="bg-light" colspan="6" style="display: none" id="content{{ item.id }}">
+              <button id="{{ item.id }}" class="btn btn-success">Complite</button>
+              <button id="{{ item.id }}" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Change</button>
+          </td>
+          </tr>
       {% endfor %}
+        </tr>
       </tbody>
 </table>
 
 
-    <script>
-     $(document).ready(function(){
-     $('#new_task').click(function () {
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Change task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="col-sm" align="center">
+         <form>
+              <div class="form-group">
+                <label for="vidicap_model_change">Тип Vidicap</label>
+                <select id="vidicap_model_change" class="form-control">
+                     <option>Vidicap HD</option>
+                     <option>Vidicap Mini</option>
+                     <option>Vidicap Stream</option>
+                     <option>Vidicap Touch</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="set_up_place_change">Где установлен</label>
+                <input type="text" class="form-control" id="set_up_place_change" placeholder="Место установки">
+              </div>
+              <div class="form-group">
+                <label for="note_change">Примечание</label>
+                <textarea class="form-control" id="note_change" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="sell_data_change">Дата отгрузки</label>
+                <input type="date" class="form-control" id="sell_data_change" placeholder="Введите дату">
+              </div>
+              <div class="form-group" hidden>
+                <input type="text" class="form-control" id="id_vidicap_change" placeholder="Введите дату">
+              </div>
+
+         </form>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="btn_change" type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+    $('.str').click(function () {
+        if ($('#content' + this.id).is(":hidden")) {
+            $('#content' + this.id).show("slow");
+        } else {
+            $('#content' + this.id).hide("slow");
+        }
+        return false;
+            });
+    });
+    $(document).ready(function(){
+    $('#new_task').click(function () {
         if ($('#add_form').is(":hidden")) {
             $('#add_form').show("slow");
         } else {
@@ -66,8 +152,8 @@
         }
         return false;
             });
-        });
-     $(document).ready(function () {
+    });
+    $(document).ready(function () {
          $('#btn_add').click(function (e) {
 
              $.post(
@@ -83,8 +169,72 @@
                  }
              );
          })
+    });
+    $(document).ready(function () {
+    $('.btn-success').click(function (e) {
+             $.post(
+                 "vidicap_complite",
+                 {
+                    'id_to_complite': this.id
+                 },
+                 function (response) {
+                     alert(response.message);
+                     document.location.reload()
+                 }
+             );
+         })
+    });
+
+
+    $(document).ready(function () {
+         $('.btn-dark').click(function (e) {
+             $.post(
+                 "vidicap_get_info_for_change",
+                 {
+                    'id_to_change': this.id
+                 },
+                 function (response) {
+                     $('#id_vidicap_change').val(response.idchange);
+                     $('#vidicap_model_change').val(response.vidicap_model_change);
+                     $('#sell_data_change').val(response.sell_data_change);
+                     $('#set_up_place_change').val(response.set_up_place_change);
+                     $('#note_change').val(response.note_change)
+                 }
+             );
+         })
+     });
+
+    $(document).ready(function () {
+         $('#btn_change').click(function (e) {
+
+             $.post(
+                 "vidicap_change",
+                 {
+                     'id':$('#id_vidicap_change').val(),
+                     'vidicap_model':$('#vidicap_model_change').val(),
+                     'sell_date':$('#sell_data_change').val(),
+                     'set_up_place':$('#set_up_place_change').val(),
+                     'note':$('#note_change').val()
+                 },
+                 function (response) {
+                     alert(response.message);
+                     document.location.reload()
+                 }
+             );
+         })
      });
     </script>
-
+<link rel="stylesheet" href="/app/static/css/bootstrap-datepicker.min.css">
+<script src="/app/static/js/bootstrap-datepicker.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('#date').datepicker({
+        format : 'yyyy-mm-dd'
+    });});
+$(document).ready(function () {
+    $('#sell_data_change').datepicker({
+        format : 'yyyy-mm-dd'
+    });});
+</script>
 
 {% endblock %}

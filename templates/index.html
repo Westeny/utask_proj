@@ -5,30 +5,36 @@
     <script src="/app/static/js/jquery-3.3.1.min.js"></script>
     <script src="/app/static/js/popper.min.js"></script>
     <script src="/app/static/js/bootstrap.min.js"></script>
-
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
-<body>
+<div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-pills">
   <a class="navbar-brand" href="#"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+  <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse">
     <div class="navbar-nav container row col-md-11">
+
+      {% block nav %}
+
       <a class="nav-itme"></a>
-      <a class="nav-item nav-link" href="/">My Tasks<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="/">My Tasks<span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="timeliner">TimeLiner</a>
       <a class="nav-item nav-link" href="vidicaps">Vidicaps info</a>
-        <a class="nav-item nav-link" href="#">Tenders info</a></div>
+      <a class="nav-item nav-link" href="tenders">Tenders info</a></div>
       <div class="navbar-nav col-md-1" align="right">
       <a class="nav-item nav-link" href="logout">Logout</a>
-    </div>
+
+      {% endblock %}
+
+      </div>
   </div>
 </nav>
 
 {% block content %}
+
     <div>
         <a> <button id="new_task" class="btn-block">Add new task</button></a>
     </div>
@@ -39,33 +45,40 @@
        <div class="col-4"></div>
         <div class="col-sm-4" align="center">
          <form>
-         <br>
-         <label>Task for</label>
-         <select class="form-control" id="user">
-              {% for person in user %}
-              <option>{{ person.username }}</option>
-              {% endfor %}
-         </select>
-         <input type="text"  id="task" class="form-control" placeholder="Task" >
-         <input type="text"  id="tag" class="form-control" placeholder="Tag" >
-         <input type="text"  id="deadline" class="form-control" placeholder="Deadline (YYYY-MM-DD)" >
-         <input type="text"  id="note" class="form-control" placeholder="Note" >
-         <br>
-         <button id ='btn_add' class="btn btn-primary btn-block">Add task</button>
+              <div class="form-group">
+                <label for="user"></label>
+                <select id="user" class="form-control">
+                    {% for person in user %}
+                    <option>{{ person.username }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="task">Задача</label>
+                <input type="text" class="form-control" id="task" placeholder="Задача">
+              </div>
+              <div class="form-group">
+                <label for="tag">Метка</label>
+                <input type="text" class="form-control" id="tag" placeholder="Метка">
+              </div>
+              <div class="form-group">
+                <label for="note">Примечание</label>
+                <textarea class="form-control" id="note" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="deadline_date">Deadline</label>
+                <input type="date" class="form-control" id="deadline_date" placeholder="Введите дату">
+              </div>
+              <button id ='btn_add' class="btn btn-primary btn-block">Добавить задачу</button>
+            <br>
          </form>
-
         </div>
        </div>
       </div>
      </div>
-
-
-
-
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Task</th>
           <th scope="col">Tag</th>
           <th scope="col">Note</th>
@@ -76,7 +89,7 @@
       <tbody id="table">
       {% for item in tasks %}
         <tr class='str' id ="{{ item.id }}">
-          <th scope="row" class="bg-transparent">{{ item.id }}</th>
+          <th scope="row" class="bg-transparent" hidden>{{ item.id }}</th>
           <td>{{ item.task_name }}</td>
           <td>{{ item.tags }}</td>
           <td>{{ item.note }}</td>
@@ -85,14 +98,69 @@
         </tr>
           <tr>
           <td class="bg-light" colspan="6" style="display: none" id="content{{ item.id }}">
-              <a href=""><button class="btn btn-success">Complite</button></a>
-              <a href=""><button class="btn btn-dark">Change</button></a>
-              <a href=""><button class="btn btn-danger">Delete</button></a>
+              <button id="{{ item.id }}" class="btn btn-success">Complite</button>
+              <button id="{{ item.id }}" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Change</button>
+              <button id="{{ item.id }}" class="btn btn-danger">Delete</button>
           </td>
           </tr>
       {% endfor %}
       </tbody>
-</table>
+    </table>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Change task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="col-sm" align="center">
+                 <form>
+                      <div class="form-group">
+                        <label for="user_change"></label>
+                        <select id="user_change" class="form-control">
+                            {% for person in user %}
+                            <option>{{ person.username }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="task_change">Задача</label>
+                        <input type="text" class="form-control" id="task_change" placeholder="Задача">
+                      </div>
+                      <div class="form-group">
+                        <label for="tag_change">Метка</label>
+                        <input type="text" class="form-control" id="tag_change" placeholder="Метка">
+                      </div>
+                      <div class="form-group">
+                        <label for="note_change">Примечание</label>
+                        <textarea class="form-control" id="note_change" rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="deadline_date_change">Deadline</label>
+                        <input type="date" class="form-control" id="deadline_date_change" placeholder="Введите дату">
+                      </div>
+                      <div class="form-group" hidden>
+                        <input id="id_task_change" type="text">
+                     </div>
+                 </form>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="btn_change" type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     <script src="/app/static/js/jquery-3.3.1.min.js"></script>
     <script>
     $(document).ready(function(){
@@ -116,6 +184,76 @@
             });
         });
 
+        $(document).ready(function () {
+         $('.btn-danger').click(function (e) {
+             $.post(
+                 "task_delete",
+                 {
+                    'id_to_delete': this.id
+                 },
+                 function (response) {
+                     alert(response.message);
+                     document.location.reload()
+                 }
+             );
+         })
+     });
+    $(document).ready(function () {
+         $('.btn-success').click(function (e) {
+             $.post(
+                 "task_complite",
+                 {
+                    'id_to_complite': this.id
+                 },
+                 function (response) {
+                     alert(response.message);
+                     document.location.reload()
+                 }
+             );
+         })
+     });
+
+        $(document).ready(function () {
+         $('.btn-dark').click(function (e) {
+             $.post(
+                 "task_get_info_for_change",
+                 {
+                    'id_to_change': this.id
+                 },
+                 function (response) {
+                     $('#id_task_change').val(response.idchange);
+                     $('#task_change').val(response.task_name_to_change);
+                     $('#tag_change').val(response.tag_to_change);
+                     $('#deadline_date_change').val(response.deadline_date_to_change);
+                     $('#note_change').val(response.note_to_change)
+                 }
+             );
+         })
+     });
+
+    $(document).ready(function () {
+         $('#btn_change').click(function (e) {
+
+             $.post(
+                 "task_change",
+                 {
+                     'id':$('#id_task_change').val(),
+                     'user':$('#user_change').val(),
+                     'task':$('#task_change').val(),
+                     'tag':$('#tag_change').val(),
+                     'deadline_date':$('#deadline_date_change').val(),
+                     'note':$('#note_change').val()
+                 },
+                 function (response) {
+                     alert(response.message);
+                     document.location.reload()
+                 }
+             );
+         })
+     });
+
+
+
     $(document).ready(function () {
          $('#btn_add').click(function (e) {
 
@@ -125,7 +263,7 @@
                      'user':$('#user').val(),
                      'task':$('#task').val(),
                      'tag':$('#tag').val(),
-                     'deadline_date':$('#deadline').val(),
+                     'deadline_date':$('#deadline_date').val(),
                      'note':$('#note').val()
                  },
                  function (response) {
@@ -135,6 +273,18 @@
          })
      });
     </script>
+<link rel="stylesheet" href="/app/static/css/bootstrap-datepicker.min.css">
+<script src="/app/static/js/bootstrap-datepicker.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('#deadline_date').datepicker({
+        format : 'yyyy-mm-dd'
+    });});
+$(document).ready(function () {
+    $('#deadline_date_change').datepicker({
+        format : 'yyyy-mm-dd'
+    });});
+</script>
 {% endblock content %}
 </body>
 </html>

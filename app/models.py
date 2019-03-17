@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import json
 # Create your models here.
 
 
@@ -16,8 +17,12 @@ class Task(models.Model):
         return self.task_name
 
 
+    def complite(self):
+        self.is_complete = True
+        return
+
 class Vidicap(models.Model):
-    """модель для контроля отгрузок и установок vidicaps"""
+    """модель для контроля отгрузок vidicap"""
 
     vidicap_type = {
         ('Vidicap HD', '1'),
@@ -37,13 +42,24 @@ class Vidicap(models.Model):
 
     def complite(self):
         self.set_up_complete = True
+        return
 
 
-#class Tenders(models.Model):
+class Tenders(models.Model):
     """модель описывающая тендеры"""
 
+    tender_number = models.CharField('Номер конкурса', max_length=150)
+    tender_lot = models.CharField('Номер лота', max_length=50)
+    budget = models.CharField('Тип бюджета', max_length=50)
+    date_podacha = models.DateField(auto_now=False) #дата и время дедлайна для подачи предложения на конкус
+    date_tender = models.DateField(auto_now=False) #дата и время проведения торгов
+    buyer = models.CharField('Покупатель', max_length=150)
+    customer = models.CharField('Заказчик', max_length=150)
+    sum_offer = models.IntegerField('Сумма предложения', default=0)
+    note = models.CharField('Примечание', max_length=2500)
 
-
+    def __str__(self):
+        return self.tender_number + ' ' + self.tender_lot
 
 
 

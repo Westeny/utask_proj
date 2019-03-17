@@ -1,5 +1,15 @@
 {% extends 'index.html' %}
 
+{% block nav %}
+      <a class="nav-itme"></a>
+      <a class="nav-item nav-link" href="/">My Tasks<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="timeliner">TimeLiner</a>
+      <a class="nav-item nav-link" href="vidicaps">Vidicaps info</a>
+      <a class="nav-item nav-link" href="tenders">Tenders info</a></div>
+      <div class="navbar-nav col-md-1" align="right">
+      <a class="nav-item nav-link" href="logout">Logout</a>
+{% endblock %}
+
 {%  block content %}
 <!link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/app/static/css/timeliner.css"/>
