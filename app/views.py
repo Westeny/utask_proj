@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 from app.models import Task, Vidicap, Tenders
 from django.contrib.auth.decorators import login_required
 from django.utils.dateparse import parse_date
-import json
 
 
 
@@ -163,14 +162,17 @@ def add_new_tender(request):
 """ login and registration"""
 
 def singin_user(request):
+    print(request.POST)
     user = authenticate(
         username = request.POST['username'],
         password = request.POST['password'])
     if user is None:
-        return render_to_response('error.html')
+        response = {'message': 'error'}
+        return JsonResponse(response)
     else:
         login(request, user)
-        return HttpResponseRedirect('/')
+        response = {'message': 'ok'}
+        return JsonResponse(response)
 
 
 def reg(request):

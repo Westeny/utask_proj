@@ -2,35 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sing in</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/app/static/css/bootstrap.min.css">
-    <script src="/app/static/js/jquery-3.3.1.slim.min.js"></script>
     <script src="/app/static/js/popper.min.js"></script>
     <script src="/app/static/js/bootstrap.min.js"></script>
+    <script src="/app/static/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
+     <div class="container-fluid">
+      <div class="row">
+       <div class="col-4"></div>
+        <div class="col-sm-4" align="center">
+         <form method="post" href="login">
+              <div class="form-group">
+                <hr style="height:60pt; visibility:hidden;">
+                <label for="login">Добро пожаловать</label>
+                <input type="text" class="form-control" id="login" placeholder="Login">
+              </div>
+              <div class="form-group" id ="reg"  style="display: none">
+                <input type="email" class="form-control" id="email" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="password" placeholder="Password">
+              </div>
+              <div class="form-group" id ="reg1"  style="display: none">
+                <input type="password" class="form-control" id="password1" placeholder="Password">
+              </div>
+              <div class="form-group" id="login_btn">
+                <button id ='btn_login' type="submit" class="btn btn-outline-primary btn-block">Войти</button>
+              </div>
+              <div class="form-group">
+                <button id ='btn_reg' type="submit" class="btn btn-outline-dark btn-block">Регистрация</button>
+              </div>
+              <div class="form-group" id="back_btn" style="display: none">
+                <button id ='btn_back' class="btn btn-outline-dark btn-block">Назад</button>
+              </div>
+         </form>
+        </div>
+       </div>
+      </div>
 
+ <script src="/app/static/js/jquery-3.3.1.min.js"></script>
 
- <div class="container-fluid row">
-     <div class="col-md-3"></div>
-     <div class="col-md-6">
-      <form class="form-signin" method="post" action="login">
-        <h2 class="form-signin-heading" align="center">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <script>
+    $(document).ready(function(){
+    $('#btn_reg').click(function () {
+        if ($('#reg').is(":hidden")) {
+            $('#reg').show("fast");
+            $('#reg1').show("fast");
+            $('#login_btn').hide("fast");
+            $('#back_btn').show("fast");
+        }
+        return false;
+            });
+        });
+    $(document).ready(function(){
+    $('#back_btn').click(function () {
+        if ($('#login_btn').is(":hidden")) {
+            $('#reg').hide("fast");
+            $('#reg1').hide("fast");
+            $('#login_btn').show("fast");
+            $('#back_btn').hide("fast");
+        }
+        return false;
+            });
+        });
 
-      </form>
-     <div class="form-signin">
-         <a class="btn btn-lg badge-dark btn-block" href="registration">Registration</a>
-     </div>
-    </div>
+    $(document).ready(function () {
+        $('#btn_login').click(function (e) {
+             $.post(
+              "login",
+              {
+                 'username':$('#login').val(),
+                 'password':$('#password').val()
+               },
+                function (response) {
+                    alert(response.message);
+                    document.location.reload()
+                }
+            );
+        })
+     });
 
- </div>
- </div>
+    </script>
 </body>
 </html>
-
