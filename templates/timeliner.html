@@ -14,60 +14,27 @@
 <!link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/app/static/css/timeliner.css"/>
 
+<!------ Include the above in your HEAD tag ---------->
+<br>
+    <br>
 <div class="container">
-<div class="row">
-
- <div class="panel-timeline" >
- <div class="timeline">
- <div class="timeline-content">
- <span class="date">
- <span class="day">27</span>
- <span class="month">Апр</span>
- <span class="year">2017</span>
- </span>
- <h2 class="title"><span class="glyphicon glyphicon-asterisk"></span> Тимелине Бутстрап</h2>
- <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus, quam non pellentesque consequat, massa justo elementum nunc, ac efficitur tortor nunc sit amet dolor. <a href="http://bootstraptema.ru/" target="_blank">BootstrapTema</a></p>
- </div>
- </div>
-
- <div class="timeline">
- <div class="timeline-content">
- <span class="date">
- <span class="day">26</span>
- <span class="month">Апр</span>
- <span class="year">2017</span>
- </span>
- <h2 class="title"><span class="glyphicon glyphicon-phone"></span> Адаптивный дизайн</h2>
- <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus, quam non pellentesque consequat, massa justo elementum nunc, ac efficitur tortor nunc sit amet dolor.</p>
- </div>
- </div>
-
- <div class="timeline">
- <div class="timeline-content">
- <span class="date">
- <span class="day">25</span>
- <span class="month">Апр</span>
- <span class="year">2017</span>
- </span>
- <h2 class="title"><span class="glyphicon glyphicon-tint"></span> Выбор расцветки</h2>
- <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus, quam non pellentesque consequat, massa justo elementum nunc, ac efficitur tortor nunc sit amet dolor.</p>
- </div>
- </div>
-
- <div class="timeline">
- <div class="timeline-content">
- <span class="date">
- <span class="day">24</span>
- <span class="month">Апр</span>
- <span class="year">2017</span>
- </span>
- <h2 class="title"><span class="glyphicon glyphicon-heart-empty"></span> Простая установка</h2>
- <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus, quam non pellentesque consequat, massa justo elementum nunc, ac efficitur tortor nunc sit amet dolor.</p>
- </div>
- </div>
-
- </div>
-
-</div><!-- ./row -->
-</div><!-- ./container -->
+    <ul class="timeline">
+        {% for item in not_complite_task %}
+          <li>
+          <div class="timeline-badge {% if item.is_complete %}info {% else %} danger{% endif %}"><i class="glyphicon glyphicon-credit-card"></i></div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4 class="timeline-title">{{ item.task_name }}</h4>
+                <p><i class="glyphicon glyphicon-time"></i>{{ item.deadline_date }}</p>
+            </div>
+            <div class="timeline-body">
+                <p>Tag:{{ item.tags }}</p>
+                <p>Note:{{ item.note }}</p>
+                <h5>{% if item.is_complete %}Complite{% endif %}</h5>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock content %}

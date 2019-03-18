@@ -19,6 +19,9 @@ urlpatterns = [
     path('vidicap_get_info_for_change', vidicap_get_info_for_change),
     path('vidicap_change', vidicap_change),
     path('tenders', tenders_info),
-    path('add_new_tender', add_new_tender)
+    path('add_new_tender', add_new_tender),
+    path('tender_delete',tender_delete),
+    path('tender_get_info_for_change',tender_get_info_for_change),
+    path('tender_change',tender_change)
 ]
 

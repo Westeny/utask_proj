@@ -69,7 +69,7 @@
           <td>{{ item.sell_date }}</td>
           <td>{{ item.set_up_place }}</td>
           <td>{{ item.note }}</td>
-          <td>{{ item.set_up_complete }}</td>
+          <td>{% if item.set_up_complete %}Да{% else %}Нет{% endif %}</td>
           <tr>
           <td class="bg-light" colspan="6" style="display: none" id="content{{ item.id }}">
               <button id="{{ item.id }}" class="btn btn-success">Complite</button>

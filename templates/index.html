@@ -79,11 +79,11 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">Task</th>
-          <th scope="col">Tag</th>
-          <th scope="col">Note</th>
+          <th scope="col">Задача</th>
+          <th scope="col">Тег</th>
+          <th scope="col">Пояснение</th>
           <th scope="col">Deadline</th>
-          <th scope="col">Complite</th>
+          <th scope="col">Статус</th>
         </tr>
       </thead>
       <tbody id="table">
@@ -94,13 +94,13 @@
           <td>{{ item.tags }}</td>
           <td>{{ item.note }}</td>
           <td>{{ item.deadline_date }}</td>
-          <td>{{ item.is_complete }}</td>
+          <td>{% if item.is_complete %}Завершена{% else %}Не завершена{% endif %}</td>
         </tr>
           <tr>
           <td class="bg-light" colspan="6" style="display: none" id="content{{ item.id }}">
-              <button id="{{ item.id }}" class="btn btn-success">Complite</button>
-              <button id="{{ item.id }}" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Change</button>
-              <button id="{{ item.id }}" class="btn btn-danger">Delete</button>
+              <button id="{{ item.id }}" class="btn btn-success">Завершить</button>
+              <button id="{{ item.id }}" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Изменить</button>
+              <button id="{{ item.id }}" class="btn btn-danger">Удалить</button>
           </td>
           </tr>
       {% endfor %}
