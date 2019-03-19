@@ -226,7 +226,6 @@ def reg(request):
 
 
 def new_user_reg(request):
-    print(request.POST)
     user = User.objects.create_user(
         email=request.POST['email'],
         username=request.POST['username'],
