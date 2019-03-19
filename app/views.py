@@ -136,7 +136,6 @@ def vidicap_change(request):
 def timeline(request):
     not_complite_task = Task.objects.filter(user=request.user).order_by('-deadline_date')
     complite_task = Task.objects.filter(is_complete=True)
-    print(not_complite_task)
     context = {'not_complite_task': not_complite_task,
                'complite_task': complite_task}
     return render_to_response('timeliner.html', context)
@@ -216,12 +215,10 @@ def singin_user(request):
         username = request.POST['username'],
         password = request.POST['password'])
     if user is None:
-        response = {'message': 'error'}
-        return JsonResponse(response)
+        return render_to_response('error.html')
     else:
         login(request, user)
-        response = {'message': 'ok'}
-        return JsonResponse(response)
+        return HttpResponseRedirect('/')
 
 
 def reg(request):
@@ -229,6 +226,7 @@ def reg(request):
 
 
 def new_user_reg(request):
+    print(request.POST)
     user = User.objects.create_user(
         email=request.POST['email'],
         username=request.POST['username'],

@@ -10,24 +10,18 @@
 </head>
 <body>
 
-     <div class="container-fluid">
+     <div class="container-fluid" id="login_form">
       <div class="row">
        <div class="col-4"></div>
         <div class="col-sm-4" align="center">
-         <form method="post" href="login">
+         <form method="post" action="login">
               <div class="form-group">
                 <hr style="height:60pt; visibility:hidden;">
                 <label for="login">Добро пожаловать</label>
-                <input type="text" class="form-control" id="login" placeholder="Login">
-              </div>
-              <div class="form-group" id ="reg"  style="display: none">
-                <input type="email" class="form-control" id="email" placeholder="Email">
+                <input type="text" class="form-control" name="username" placeholder="Login">
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" id="password" placeholder="Password">
-              </div>
-              <div class="form-group" id ="reg1"  style="display: none">
-                <input type="password" class="form-control" id="password1" placeholder="Password">
+                <input type="password" class="form-control" name="password" placeholder="Password">
               </div>
               <div class="form-group" id="login_btn">
                 <button id ='btn_login' type="submit" class="btn btn-outline-primary btn-block">Войти</button>
@@ -35,8 +29,37 @@
               <div class="form-group">
                 <button id ='btn_reg' type="submit" class="btn btn-outline-dark btn-block">Регистрация</button>
               </div>
-              <div class="form-group" id="back_btn" style="display: none">
-                <button id ='btn_back' class="btn btn-outline-dark btn-block">Назад</button>
+         </form>
+        </div>
+       </div>
+      </div>
+
+
+
+     <div class="container-fluid" id='reg_form' style="display: none">
+      <div class="row">
+       <div class="col-4"></div>
+        <div class="col-sm-4" align="center">
+         <form method="post" action="new_user_add">
+              <div class="form-group">
+                <hr style="height:60pt; visibility:hidden;">
+                <label for="login">Добро пожаловать</label>
+                <input type="text" class="form-control" name="username" placeholder="Login">
+              </div>
+              <div class="form-group" id ="reg">
+                <input type="email" class="form-control" name="email" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+              </div>
+              <div class="form-group" id ="reg1">
+                <input type="password" class="form-control" name="password1" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <button id ='btn_reg' type="submit" class="btn btn-outline-dark btn-block">Регистрация</button>
+              </div>
+              <div class="form-group" id="back_btn">
+                <button id ='btn_back'  class="btn btn-outline-dark btn-block">Назад</button>
               </div>
          </form>
         </div>
@@ -48,42 +71,23 @@
     <script>
     $(document).ready(function(){
     $('#btn_reg').click(function () {
-        if ($('#reg').is(":hidden")) {
-            $('#reg').show("fast");
-            $('#reg1').show("fast");
-            $('#login_btn').hide("fast");
-            $('#back_btn').show("fast");
+        if ($('#reg_form').is(":hidden")) {
+            $('#reg_form').show("fast");
+            $('#login_form').hide('fast')
         }
         return false;
             });
         });
     $(document).ready(function(){
     $('#back_btn').click(function () {
-        if ($('#login_btn').is(":hidden")) {
-            $('#reg').hide("fast");
-            $('#reg1').hide("fast");
-            $('#login_btn').show("fast");
-            $('#back_btn').hide("fast");
+        if ($('#login_form').is(":hidden")) {
+            $('#reg_form').hide("fast");
+            $('#login_form').show("fast");
         }
         return false;
             });
         });
 
-    $(document).ready(function () {
-        $('#btn_login').click(function (e) {
-             $.post(
-              "login",
-              {
-                 'username':$('#login').val(),
-                 'password':$('#password').val()
-               },
-                function (response) {
-                    alert(response.message);
-                    document.location.reload()
-                }
-            );
-        })
-     });
 
     </script>
 </body>

@@ -21,6 +21,7 @@
 
       <a class="nav-itme"></a>
       <a class="nav-item nav-link active" href="/">My Tasks<span class="sr-only">(current)</span></a>
+
       <a class="nav-item nav-link" href="timeliner">TimeLiner</a>
       <a class="nav-item nav-link" href="vidicaps">Vidicaps info</a>
       <a class="nav-item nav-link" href="tenders">Tenders info</a></div>
@@ -30,12 +31,13 @@
       {% endblock %}
 
       </div>
+
   </div>
 </nav>
 
 {% block content %}
 
-    <div>
+    <div >
         <a> <button id="new_task" class="btn-block">Add new task</button></a>
     </div>
 
@@ -79,11 +81,11 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">Задача</th>
-          <th scope="col">Тег</th>
-          <th scope="col">Пояснение</th>
-          <th scope="col">Deadline</th>
-          <th scope="col">Статус</th>
+          <th style="width: 15%" scope="col">Задача</th>
+          <th style="width: 10%" scope="col">Тег</th>
+          <th style="width: 35%"scope="col">Пояснение</th>
+          <th style="width: 15%"scope="col">Deadline</th>
+          <th style="width: 15%"scope="col">Статус</th>
         </tr>
       </thead>
       <tbody id="table">
